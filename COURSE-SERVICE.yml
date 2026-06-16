@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: ${SERVER_PORT:9002}
 
   datasource:
     url: jdbc:mysql://localhost:3306/db2
