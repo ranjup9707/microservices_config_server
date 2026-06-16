@@ -1,0 +1,50 @@
+server:
+  port: 8001
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          httpClient:
+            #Gateway waits max 3 secs to establish the connection
+            connect-timeout: 3000 #3000ms equals 3 sec
+            #Gateway waits max of 5 secs for full response, else throw 504 Gateway Timeout error
+            response-timeout: 15s
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+
+          routes:
+            - id: auth-service
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/api/auth/**
+
+            - id: student-service
+              uri: lb://STUDENT-SERVICE #Same name as service name provided in Student Service (spring.application.name)
+              predicates:
+                - Path=/students/**
+              filters:
+                - AuthenticationFilter
+
+            - id: course-service
+              uri: lb://COURSE-SERVICE
+              predicates:
+                - Path=/courses/**
+              filters:
+                - AuthenticationFilter
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, gateway
