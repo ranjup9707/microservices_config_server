@@ -64,5 +64,5 @@ logging:
     io.github.resilience4j.retry: DEBUG
 
 message:
-  text: "Student Message"
+  text: "Student Message Again"
 
