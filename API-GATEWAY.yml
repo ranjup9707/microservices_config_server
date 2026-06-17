@@ -25,7 +25,7 @@ spring:
             - id: student-service
               uri: lb://STUDENT-SERVICE #Same name as service name provided in Student Service (spring.application.name)
               predicates:
-                - Path=/students/**
+                - Path=/students/**, /test/**
               filters:
                 - AuthenticationFilter
 
