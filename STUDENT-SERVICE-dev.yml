@@ -63,3 +63,6 @@ logging:
   level:
     io.github.resilience4j.retry: DEBUG
 
+message:
+  text: "Hello World"
+
