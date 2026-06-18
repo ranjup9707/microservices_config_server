@@ -21,6 +21,8 @@ eureka:
 
     healthcheck:
       enabled: true
+  instance:
+    prefer-ip-address: true
 
 management:
   endpoints:
