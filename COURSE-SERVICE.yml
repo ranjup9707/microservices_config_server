@@ -23,11 +23,7 @@ eureka:
       enabled: true
   instance:
     prefer-ip-address: true
-
-  instance:
     instance-id: ${spring.application.name}:${server.port}
-
-
 
 management:
   endpoints:
