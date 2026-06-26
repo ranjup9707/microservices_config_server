@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: APIGateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true #Gateway ask Eureka - Which services are registered?
+              lower-case-service-id: true
+          routes:
+            - id: account-service #Unique Identifier
+              uri: lb://AccountService #Service register in Eureka (spring.application.name)
+              predicates:
+                - Path=/accounts/**
+            - id: order-service
+              uri: lb://OrderService
+              predicates:
+                - Path=/orders/**
+            - id: payment-service
+              uri: lb://PaymentService
+              predicates:
+                - Path=/payments/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+
+server:
+  port: 7000
