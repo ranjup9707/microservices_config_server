@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: AccountService
   datasource:
     url: jdbc:mysql://localhost:3306/test1
     username: root
@@ -16,17 +14,6 @@ eureka:
         http://localhost:8000/eureka
   instance:
     hostname: localhost
-    instance-id: ${spring.application.name}:${random.value}
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info, refresh
-
 
 server:
   port: 9001
-
-config:
-  message: "AccountService Update"
