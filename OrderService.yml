@@ -20,14 +20,14 @@ eureka:
 resilience4j:
   circuitbreaker:
     instances:
-      accountServiceCB:
-        failure-rate-threshold: 50
-        minimum-number-of-calls: 5
-        sliding-window-size: 10
+      accountServiceCB: # Must match the name used in @CircuitBreaker(name = "accountServiceCB")
+        failure-rate-threshold: 50 # Open the circuit if 50% or more calls fail
+        minimum-number-of-calls: 5 # CB starts calculating failure rate only after at least 5 calls
+        sliding-window-size: 10 # Consider the last 10 calls for failure rate calculation
         sliding-window-type: COUNT_BASED
-        wait-duration-in-open-state: 30s
-        permitted-number-of-calls-in-half-open-state: 3
-        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 30s # Stay in OPEN state for 30 seconds before moving to HALF_OPEN
+        permitted-number-of-calls-in-half-open-state: 3 #  Allow 3 test calls in HALF_OPEN state
+        automatic-transition-from-open-to-half-open-enabled: true # # Automatically move from OPEN to HALF_OPEN after 30 seconds
 
 server:
   port: 9002
