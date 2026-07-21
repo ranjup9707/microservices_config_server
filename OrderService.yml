@@ -39,7 +39,7 @@ resilience4j:
           - java.net.SocketTimeoutException
           - java.net.ConnectException
         ignore-exceptions:
-          - com.ecommerce.account.exception.AccountNotFoundException
+          - feign.FeignException$NotFound   # Checks for the NOT FOUND (HTTP Status Code 404) which comes from AccountService if acct no not available 
           - jakarta.validation.ValidationException
       
 
