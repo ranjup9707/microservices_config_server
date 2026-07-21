@@ -28,6 +28,20 @@ resilience4j:
         wait-duration-in-open-state: 30s # Stay in OPEN state for 30 seconds before moving to HALF_OPEN
         permitted-number-of-calls-in-half-open-state: 3 #  Allow 3 test calls in HALF_OPEN state
         automatic-transition-from-open-to-half-open-enabled: true # # Automatically move from OPEN to HALF_OPEN after 30 seconds
+  retry:
+    instances:
+      accountServiceRetry:
+        max-attempts: 3
+        wait-duration: 2
+        enable-exponential-backoff: false
+        retry-exceptions:
+          - feign.RetryableException
+          - java.net.SocketTimeoutException
+          - java.net.ConnectException
+        ignore-exceptions:
+          - com.ecommerce.account.exception.AccountNotFoundException
+          - jakarta.validation.ValidationException
+      
 
 server:
   port: 9002
