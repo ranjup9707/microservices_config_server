@@ -33,7 +33,8 @@ resilience4j:
       accountServiceRetry:
         max-attempts: 3
         wait-duration: 2
-        enable-exponential-backoff: false
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
         retry-exceptions:
           - feign.RetryableException
           - java.net.SocketTimeoutException
