@@ -42,6 +42,11 @@ resilience4j:
         ignore-exceptions:
           - feign.FeignException$NotFound   # Checks for the NOT FOUND (HTTP Status Code 404) which comes from AccountService if acct no not available 
           - jakarta.validation.ValidationException
+  timelimiter:
+    instances:
+      accountServiceTimeLimiter:
+        timeout-duration: 3s
+        cancel-running-future: true
       
 
 server:
