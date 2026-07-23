@@ -35,10 +35,6 @@ resilience4j:
         wait-duration: 2
         enable-exponential-backoff: true
         exponential-backoff-multiplier: 2
-        retry-exceptions:
-          - feign.RetryableException
-          - java.net.SocketTimeoutException
-          - java.net.ConnectException
         ignore-exceptions:
           - feign.FeignException$NotFound   # Checks for the NOT FOUND (HTTP Status Code 404) which comes from AccountService if acct no not available 
           - jakarta.validation.ValidationException
