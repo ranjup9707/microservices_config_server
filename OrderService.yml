@@ -43,7 +43,12 @@ resilience4j:
       accountServiceTimeLimiter:
         timeout-duration: 3s
         cancel-running-future: true
+  ratelimiter:
+    instances:
+      accountServiceRateLimiter:
+        limit-for-period: 5 # Allow 5 requests during every refresh period of 10 secs
+        limit-refresh-period: 10s # Request window time
+        timeout-duration: 0 # Do not wait for permit
       
-
 server:
   port: 9002
